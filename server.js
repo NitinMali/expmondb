@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-const routes = require('./routes');
 
 //init express
 const app = express();
@@ -11,24 +10,26 @@ const router = express.Router()
 
 const port = process.env.PORT || 3000;
 
+const mongoDBUrl = '';
+mongoose.connect(mongoDBUrl);
 
-//https://codeburst.io/dont-use-nodemon-there-are-better-ways-fc016b50b45e
-const chokidar = require('chokidar');
-const watcher = chokidar.watch('./app')
+const ListSchema = require('./app/models/list');
+
+mongoose.model('TripList', ListSchema)
+
+const db = mongoose.connection;
+mongoose.Promise = global.Promise;
+
+db.on('error',  function(err) {
+  console.error('MongoDB connection error:'+ err);
+});
+
+db.on('open', function(ref){
+  console.log('Connected to mongo server!!')
+});
 
 
-watcher.on('ready', function() {
-  watcher.on('all', function() {
-    console.log("Clearing /app/ module cache from server")
-    Object.keys(require.cache).forEach(function(id) {
-      if (/[\/\\]app[\/\\]/.test(id)) {
-          delete require.cache[id]
-      }
-
-      app.listen(port);
-    })
-  })
-})
+const routes = require('./routes');
 
 //express middleware
 app.use(bodyParser.urlencoded({extended: true}));
