@@ -1,0 +1,29 @@
+{
+  "name": "express-mongodb",
+  "version": "1.0.0",
+  "description": "Node js express mongodb implementation",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon start server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NitinMali/expmondb.git"
+  },
+  "author": "Nitin Mali",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NitinMali/expmondb/issues"
+  },
+  "homepage": "https://github.com/NitinMali/expmondb#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mongoose": "^5.1.1"
+  },
+  "devDependencies": {
+    "chokidar": "^2.0.3",
+    "nodemon": "^1.17.4"
+  }
+}
